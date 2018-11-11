@@ -28,6 +28,7 @@ namespace HomeWork.Server.Actors
             var response = new BalanceReport(balance, lastOperations, message.UserId);
 
             Sender.Tell(response);
+            Console.WriteLine($"{_userId} balance change operation executed");
         }
 
         private double CalculateBalance()
