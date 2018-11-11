@@ -13,16 +13,16 @@ namespace HomeWork.Server.Actors
         {
             _userAccounts = new Dictionary<Guid, IActorRef>();
 
-            Receive<ChangeUserAccountBalance>(message => HandleChangeUserAccountBalance(message));
+            Receive<ChangeBalance>(message => HandleChangeUserAccountBalance(message));
         }
 
-        private void HandleChangeUserAccountBalance(ChangeUserAccountBalance message)
+        private void HandleChangeUserAccountBalance(ChangeBalance message)
         {
             CreateChildUserIfNotExists(message.UserId);
 
             IActorRef childActorRef = _userAccounts[message.UserId];
 
-            childActorRef.Tell(message);
+            childActorRef.Tell(message, Sender);
         }
 
         private void CreateChildUserIfNotExists(Guid userId)

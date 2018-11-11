@@ -2,9 +2,9 @@
 
 namespace HomeWork.Common.Messages
 {
-    public class ChangeUserAccountBalance
+    public class ChangeBalance
     {
-        public ChangeUserAccountBalance(Guid userId, double changedAmount)
+        public ChangeBalance(Guid userId, double changedAmount)
         {
             UserId = userId;
             ChangedAmount = changedAmount;

@@ -9,6 +9,8 @@ namespace HomeWork.Client
 {
     class Program
     {
+        private static ActorSystem _system;
+
         static void Main(string[] args)
         {
             Thread.Sleep(1000);
@@ -27,15 +29,36 @@ namespace HomeWork.Client
                         }
                     }");
 
-            var system = ActorSystem.Create("ActorSystem", config);
-            system.ActorOf(Props.Create<UserBalanceActor>(), "UserBalance");
-
+            _system = ActorSystem.Create("ActorSystem", config);
+            _system.ActorOf(Props.Create<UserBalanceActor>(), "UserBalance");
             Console.WriteLine("Client started");
 
-            var message = new ChangeBalanceMessage(Guid.NewGuid(), 100);
-            system.ActorSelection("akka://ActorSystem/user/UserBalance").Tell(message);
+            // presentation
+
+            var user1 = Guid.NewGuid();
+            var user2 = Guid.NewGuid();
+
+            SendBalanceChangeMessage(user1, 100);
+            SendBalanceChangeMessage(user2, -50);
+            SendBalanceChangeMessage(user1, 15);
+            SendBalanceChangeMessage(user2, 200);
+            SendBalanceChangeMessage(user1, -58);
+            SendBalanceChangeMessage(user2, 40);
+            SendBalanceChangeMessage(user2, -20);
+            SendBalanceChangeMessage(user2, 66);
+            SendBalanceChangeMessage(user2, -40);
+            SendBalanceChangeMessage(user2, 15);
+
+
+            
 
             Console.ReadLine();
+        }
+
+        private static void SendBalanceChangeMessage(Guid userId, double changedAmount)
+        {
+            var message = new ChangeBalanceMessage(userId, changedAmount);
+            _system.ActorSelection("akka://ActorSystem/user/UserBalance").Tell(message);
         }
     }
 }
