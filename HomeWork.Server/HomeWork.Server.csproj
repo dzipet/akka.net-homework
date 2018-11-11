@@ -13,4 +13,8 @@
     <ProjectReference Include="..\HomeWork.Common\HomeWork.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
+
 </Project>
