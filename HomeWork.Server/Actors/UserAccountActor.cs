@@ -11,7 +11,7 @@ namespace HomeWork.Server.Actors
         private List<ChangeBalance> _events;
         private readonly Guid _userId;
 
-        public UserAccountActor(Guid userId)
+        public UserAccountActor(Guid userId, )
         {
             _userId = userId;
             _events = new List<ChangeBalance>();

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Configuration;
 using HomeWork.Client.Actors;
 using HomeWork.Client.Messages;
+using HomeWork.Client.Utilities;
 
 namespace HomeWork.Client
 {
@@ -11,7 +13,7 @@ namespace HomeWork.Client
     {
         private static ActorSystem _system;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Thread.Sleep(1000);
             Console.WriteLine("Starting client");
@@ -30,11 +32,11 @@ namespace HomeWork.Client
                     }");
 
             _system = ActorSystem.Create("ActorSystem", config);
-            _system.ActorOf(Props.Create<UserBalanceActor>(), "UserBalance");
+            var userAccountsCoordinator = await _system.ActorSelection("akka.tcp://ActorSystem@localhost:8091/user/UserAccountsCoordinator").ResolveOne(TimeSpan.FromSeconds(1));
+            _system.ActorOf(Props.Create<UserBalanceActor>(new ConsoleWriter(), userAccountsCoordinator), "UserBalance");
             Console.WriteLine("Client started");
 
             // presentation
-
             var user1 = Guid.NewGuid();
             var user2 = Guid.NewGuid();
 
@@ -48,9 +50,6 @@ namespace HomeWork.Client
             SendBalanceChangeMessage(user2, 66);
             SendBalanceChangeMessage(user2, -40);
             SendBalanceChangeMessage(user2, 15);
-
-
-            
 
             Console.ReadLine();
         }
