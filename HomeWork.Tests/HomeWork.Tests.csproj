@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HomeWork.Common\HomeWork.Common.csproj" />
+    <ProjectReference Include="..\HomeWork.Infrastructure\HomeWork.Infrastructure.csproj" />
     <ProjectReference Include="..\HomeWork.Server\HomeWork.Server.csproj" />
     <ProjectReference Include="..\HomeWork\HomeWork.Client.csproj" />
   </ItemGroup>

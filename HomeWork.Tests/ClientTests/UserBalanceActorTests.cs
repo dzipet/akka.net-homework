@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Akka.Actor;
-using Akka.TestKit;
-using Akka.TestKit.TestActors;
 using Akka.TestKit.Xunit2;
 using HomeWork.Client.Actors;
 using HomeWork.Client.Messages;
-using HomeWork.Client.Utilities;
 using HomeWork.Common.Messages;
+using HomeWork.Infrastructure.Utilities;
 using Moq;
 using Xunit;
 

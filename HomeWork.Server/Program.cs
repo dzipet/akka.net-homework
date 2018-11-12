@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using Akka.Configuration;
+using HomeWork.Infrastructure.Utilities;
 using HomeWork.Server.Actors;
 
 namespace HomeWork.Server
@@ -24,7 +25,7 @@ namespace HomeWork.Server
                     }");
 
             var system = ActorSystem.Create("ActorSystem", config);
-            var actor = system.ActorOf(Props.Create<UserAccountsCoordinatorActor>(), "UserAccountsCoordinator");
+            var actor = system.ActorOf(Props.Create<UserAccountsCoordinatorActor>(new ConsoleWriter()), "UserAccountsCoordinator");
 
             Console.WriteLine("Server started");
 

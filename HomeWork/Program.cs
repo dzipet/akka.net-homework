@@ -5,7 +5,7 @@ using Akka.Actor;
 using Akka.Configuration;
 using HomeWork.Client.Actors;
 using HomeWork.Client.Messages;
-using HomeWork.Client.Utilities;
+using HomeWork.Infrastructure.Utilities;
 
 namespace HomeWork.Client
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HomeWork.Client.Utilities
+namespace HomeWork.Infrastructure.Utilities
 {
     public class ConsoleWriter : IConsoleWriter
     {

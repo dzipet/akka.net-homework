@@ -1,8 +1,7 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 using HomeWork.Client.Messages;
-using HomeWork.Client.Utilities;
 using HomeWork.Common.Messages;
+using HomeWork.Infrastructure.Utilities;
 
 namespace HomeWork.Client.Actors
 {

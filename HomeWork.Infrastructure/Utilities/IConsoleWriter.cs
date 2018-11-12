@@ -1,4 +1,4 @@
-﻿namespace HomeWork.Client.Utilities
+﻿namespace HomeWork.Infrastructure.Utilities
 {
     public interface IConsoleWriter
     {

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using Akka.Actor;
 using HomeWork.Common.Messages;
+using HomeWork.Infrastructure.Utilities;
 
 namespace HomeWork.Server.Actors
 {
     public class UserAccountsCoordinatorActor : ReceiveActor
     {
         private readonly Dictionary<Guid, IActorRef> _userAccounts;
+        private readonly IConsoleWriter _consoleWriter;
 
-        public UserAccountsCoordinatorActor()
+        public UserAccountsCoordinatorActor(IConsoleWriter consoleWriter)
         {
+            _consoleWriter = consoleWriter;
             _userAccounts = new Dictionary<Guid, IActorRef>();
 
             Receive<ChangeBalance>(message => HandleChangeUserAccountBalance(message));
@@ -29,10 +32,10 @@ namespace HomeWork.Server.Actors
         {
             if (!_userAccounts.ContainsKey(userId))
             {
-                IActorRef newChildActorRef = Context.ActorOf(Props.Create(() => new UserAccountActor(userId)), $"User{userId}");
+                IActorRef newChildActorRef = Context.ActorOf(Props.Create(() => new UserAccountActor(userId, _consoleWriter)), $"User{userId}");
                 _userAccounts.Add(userId, newChildActorRef);
 
-                Console.WriteLine($"UserAccountsCoordinatorActor created new child UserAccountActor for {userId} (Total Users: {_userAccounts.Count})");
+                _consoleWriter.WriteLine($"UserAccountsCoordinatorActor created new child UserAccountActor for {userId} (Total Users: {_userAccounts.Count})");
             }
         }
     }
